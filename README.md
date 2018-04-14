@@ -1,1 +1,1 @@
-# hello
+# This is the student advisor program
