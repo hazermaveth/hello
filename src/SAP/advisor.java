@@ -14,7 +14,12 @@ public class advisor{
 		majorProgress();
 	}
 
-
+	/**
+	*This method seperates the list gathered from the xcel file into 
+	*@className
+	*@classGrade
+	*@currentCHours
+	*/
 	private void majorProgress() {
 		
 		List<String> classesTaken = Arrays.asList("MATH 124 C 4.0", "IS 301 B 3.0", "IS 281 A 3.0", "ENG 305 B 3.0", "EET 340 B 3.0"
