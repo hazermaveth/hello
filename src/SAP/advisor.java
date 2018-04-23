@@ -8,23 +8,34 @@ import java.util.List;
 public class advisor{
 	String studentID;
 	ArrayList<course> courses = new ArrayList<course>();
+	ArrayList<requirements> req = new ArrayList<requirements>();
 	String major;
 
+	/***
+	 * 
+	 */
 	public void start() {
 		majorProgress();
 		sortCourses();
+		reqSetUpGen();
+		//reqSetUpMajor();
 		printCourses();
 		printGrades();
+		printCreditHours();
 	}
 
+
+
+
 	public advisor(String newID) {
-		studentID = newID;	
+		studentID = newID;
+		setMajor("CS");
 	}
 
 	public void setMajor(String string) {
 		major = string;	
 	}
-	
+
 	private void sortCourses() {
 		for(int i = 0; i < courses.size(); i++){
 			for(int j = 0; j < courses.size()-1; j++){
@@ -35,7 +46,7 @@ public class advisor{
 				}
 			}
 		}
-		
+
 		for(int i = 0; i < courses.size(); i++){
 			for(int j = 0; j < courses.size()-1; j++){
 				if((courses.get(j)).getNameNum() > (courses.get(j+1)).getNameNum()){
@@ -45,11 +56,6 @@ public class advisor{
 				}
 			}
 		}
-	}
-
-	public void sameMajor(){
-
-		major = "CS";
 	}
 
 	private void majorProgress() {
@@ -71,6 +77,8 @@ public class advisor{
 			class1.setGrade(classGrade);
 			class1.setHours(classCH);
 
+			//I do not think we need this, in fact I think this would cause problems.
+			/*
 			for(int j = 0; j < courses.size(); j++){
 				if (className.equals((courses.get(j).getName()))){
 					if(class1.getGradeValue() >= (courses.get(j).getGradeValue())){
@@ -78,10 +86,38 @@ public class advisor{
 					}
 				} 
 			}
+			 */
 			courses.add(class1);	
 		}
 	}
 
+	private void reqSetUpGen() {
+		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, UNIV 101 D 3", "Communicating Effectively, 9, ENG 102 C 3", "Communicating Effectively, 9, ENG 104 C 3",
+				"Communicating Effectively, 9, COMM 101 D 3", "Communicating Effectively, 9, COMM 102 D 3", "Communicating Effectively, 9, COMM 102 D 3",
+				"Understanding and Applying Mathematical Principles, 3, MATH 113 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 119 D 3",
+				"Understanding and Applying Mathematical Principles, 3, MATH 120 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 124 D 3", 
+				"Understanding and Applying Mathematical Principles, 3, MATH 213 D 3");
+
+		String requirmentOne = requirmentsList.get(0);
+		String r1 = requirmentOne.substring(0, requirmentOne.indexOf(",")); String inR1 = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		System.out.println(r1);
+		System.out.println(inR1);
+
+		for (int i = 1; i < requirmentsList.size(); i++){
+			String tempReq = requirmentsList.get(i);
+			String r2 = tempReq.substring(0, tempReq.indexOf(",")); String inR2 = tempReq.substring(tempReq.indexOf(",") + 2, tempReq.length());
+
+			String sameReq = requirmentsList.get(i-1);
+			String s2 = sameReq.substring(0, sameReq.indexOf(","));
+			if(r2.equals(s2)){
+				System.out.println(inR2);
+			} else {
+				System.out.println(r2);
+				System.out.println(inR2);
+			}
+		}
+
+	}
 
 	public void printCourses() {
 
@@ -100,14 +136,28 @@ public class advisor{
 			System.out.print((courses.get(i)).getGrade() + ", ");
 		}
 		System.out.print((courses.get(courses.size()-1)).getGrade());
-		System.out.println("]");
-		
+		System.out.println("] - Grades");
+
+
 		System.out.print("[");
 		for(int i = 0; i < courses.size() - 1; i++){
 			System.out.print((courses.get(i)).getGradeValue() + ", ");
 		}
 		System.out.print((courses.get(courses.size()-1)).getGradeValue());
-		System.out.println("]");
+		System.out.println("] - Value of the Grades");
 
-	}	
+	}
+	
+	private void printCreditHours() {
+		System.out.print("[");
+		for(int i = 0; i < courses.size() - 1; i++){
+			System.out.print((courses.get(i)).getCreditHours() + ", ");
+		}
+		System.out.print((courses.get(courses.size()-1)).getCreditHours());
+		System.out.println("] - Credit Hours");
+
+
+	}
+
+
 }
