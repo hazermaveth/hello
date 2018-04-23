@@ -2,8 +2,8 @@ package SAP;
 
 public class course {
 
-public String name, grade, group;
-	public int hours, courseNameNum, courseIDNum, gradeValue;
+	public String name, grade, group;
+	public int hours, courseGroupNum, courseIDNum, gradeValue;
 
 	public course(String string) {
 		name = string;
@@ -19,13 +19,13 @@ public String name, grade, group;
 		}
 
 		switch (group){
-		case "ANTH": courseNameNum = 0; break;
-		case "CS": courseNameNum = 1; break;
-		case "EET": courseNameNum = 2; break;
-		case "ENG": courseNameNum = 3; break;
-		case "IS": courseNameNum = 4; break;
-		case "MATH": courseNameNum = 5; break;
-		default: courseNameNum = 6;
+		case "ANTH": courseGroupNum = 0; break;
+		case "CS": courseGroupNum = 1; break;
+		case "EET": courseGroupNum = 2; break;
+		case "ENG": courseGroupNum = 3; break;
+		case "IS": courseGroupNum = 4; break;
+		case "MATH": courseGroupNum = 5; break;
+		default: courseGroupNum = 6;
 		}
 
 
@@ -35,7 +35,6 @@ public String name, grade, group;
 		hours = i;
 
 	}
-
 
 	public void setGrade(String string) {
 		grade = string;
@@ -57,20 +56,44 @@ public String name, grade, group;
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @return Value of grade
+	 */
 	public int getGradeValue() {
 		return gradeValue;
 	}
 
+	/**
+	 * 
+	 * @return grade
+	 */
 	public String getGrade() {
 		return grade;
 	}
 	
+	/**
+	 * 
+	 * @return number value of the group the course is in
+	 */
 	public int getNameNum() {
-		return courseNameNum;
+		return courseGroupNum;
 	}
 	
+	/**
+	 * 
+	 * @return Number part of the course ID
+	 */
 	public int getIDNum() {
 		return courseIDNum;
+	}
+
+	/**
+	 * 
+	 * @return Credit hours of the course
+	 */
+	public int getCreditHours() {
+		return hours;
 	}
 
 }
