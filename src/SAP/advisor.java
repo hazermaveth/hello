@@ -92,28 +92,28 @@ public class advisor{
 	}
 
 	private void reqSetUpGen() {
-		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, UNIV 101 D 3", "Communicating Effectively, 9, ENG 102 C 3", "Communicating Effectively, 9, ENG 104 C 3",
-				"Communicating Effectively, 9, COMM 101 D 3", "Communicating Effectively, 9, COMM 102 D 3", "Communicating Effectively, 9, COMM 102 D 3",
+		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, 1, UNIV 101 D 3", "Communicating Effectively, 9, 1, ENG 102 C 3", "Communicating Effectively, 9, 2, ENG 104 C 3",
+				"Communicating Effectively, 9, 3, COMM 101 D 3", "Communicating Effectively, 9, 3, COMM 102 D 3", "Communicating Effectively, 9, COMM 102 D 3",
 				"Understanding and Applying Mathematical Principles, 3, MATH 113 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 119 D 3",
 				"Understanding and Applying Mathematical Principles, 3, MATH 120 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 124 D 3", 
 				"Understanding and Applying Mathematical Principles, 3, MATH 213 D 3");
 
 		String requirmentOne = requirmentsList.get(0);
-		String r1 = requirmentOne.substring(0, requirmentOne.indexOf(",")); String inR1 = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		String r1 = requirmentOne.substring(0, requirmentOne.indexOf(",")); String requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
 		System.out.println(r1);
-		System.out.println(inR1);
+		System.out.println(requirmentOne);
 
 		for (int i = 1; i < requirmentsList.size(); i++){
 			String tempReq = requirmentsList.get(i);
-			String r2 = tempReq.substring(0, tempReq.indexOf(",")); String inR2 = tempReq.substring(tempReq.indexOf(",") + 2, tempReq.length());
+			String r2 = tempReq.substring(0, tempReq.indexOf(",")); tempReq = tempReq.substring(tempReq.indexOf(",") + 2, tempReq.length());
 
 			String sameReq = requirmentsList.get(i-1);
 			String s2 = sameReq.substring(0, sameReq.indexOf(","));
 			if(r2.equals(s2)){
-				System.out.println(inR2);
+				System.out.println(tempReq);
 			} else {
 				System.out.println(r2);
-				System.out.println(inR2);
+				System.out.println(tempReq);
 			}
 		}
 
