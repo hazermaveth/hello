@@ -19,9 +19,10 @@ public class advisor{
 		sortCourses();
 		reqSetUpGen();
 		//reqSetUpMajor();
-		printCourses();
-		printGrades();
-		printCreditHours();
+		//printCourses();
+		//printGrades();
+		//printCreditHours();
+		printReq();
 	}
 
 
@@ -92,31 +93,111 @@ public class advisor{
 	}
 
 	private void reqSetUpGen() {
-		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, 1, UNIV 101 D 3", "Communicating Effectively, 9, 1, ENG 102 C 3", "Communicating Effectively, 9, 2, ENG 104 C 3",
-				"Communicating Effectively, 9, 3, COMM 101 D 3", "Communicating Effectively, 9, 3, COMM 102 D 3", "Communicating Effectively, 9, COMM 102 D 3",
-				"Understanding and Applying Mathematical Principles, 3, MATH 113 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 119 D 3",
-				"Understanding and Applying Mathematical Principles, 3, MATH 120 D 3", "Understanding and Applying Mathematical Principles, 3, MATH 124 D 3", 
-				"Understanding and Applying Mathematical Principles, 3, MATH 213 D 3");
+		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, 1, UNIV 101, D, 3", "Communicating Effectively, 9, 1, ENG 102, C, 3", "Communicating Effectively, 9, 2, ENG 104, C, 3",
+				"Communicating Effectively, 9, 3, COMM 101, D, 3", "Communicating Effectively, 9, 3, COMM 102, D, 3", "Communicating Effectively, 9, 3, COMM 102, D, 3",
+				"Understanding and Applying Mathematical Principles, 3, 1, MATH 113, D, 3", "Understanding and Applying Mathematical Principles, 3, 1, MATH 119, D, 3",
+				"Understanding and Applying Mathematical Principles, 3, 1, MATH 120, D, 3", "Understanding and Applying Mathematical Principles, 3, 1, MATH 124, D, 3", 
+				"Understanding and Applying Mathematical Principles, 3, 1, MATH 213, D, 3");
 
+		String credit = "";
+		String reqCourse = "";
+		int creditHours = 0;
 		String requirmentOne = requirmentsList.get(0);
-		String r1 = requirmentOne.substring(0, requirmentOne.indexOf(",")); String requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
-		System.out.println(r1);
-		System.out.println(requirmentOne);
 
-		for (int i = 1; i < requirmentsList.size(); i++){
-			String tempReq = requirmentsList.get(i);
-			String r2 = tempReq.substring(0, tempReq.indexOf(",")); tempReq = tempReq.substring(tempReq.indexOf(",") + 2, tempReq.length());
+		String nameOne = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		String creditNeed = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		String andOr = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		String courseName = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		String grade = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
 
-			String sameReq = requirmentsList.get(i-1);
-			String s2 = sameReq.substring(0, sameReq.indexOf(","));
-			if(r2.equals(s2)){
-				System.out.println(tempReq);
-			} else {
-				System.out.println(r2);
-				System.out.println(tempReq);
-			}
+		int creditHoursNeed = Integer.parseInt(creditNeed);
+		int orAnd = Integer.parseInt(andOr);
+
+		if(requirmentOne.length() > 1){
+			credit = requirmentOne.substring(0, requirmentOne.indexOf(","));
+			creditHours = Integer.parseInt(credit);
+			reqCourse = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+		} else {
+			credit = requirmentOne.substring(0, requirmentOne.length());
+			creditHours = Integer.parseInt(credit);
 		}
 
+		requirements first = new requirements(nameOne);
+		first.setNeededCredit(creditHoursNeed);
+
+		course temp1 = new course(courseName);
+		temp1.setOrAnd(orAnd);
+		temp1.setGrade(grade);
+		temp1.setPreReq(reqCourse);
+		temp1.setHours(creditHours);
+
+		first.add(temp1);
+		req.add(first);
+
+		for (int i = 1; i < requirmentsList.size(); i++){
+
+			credit = "";
+			reqCourse = "";
+			creditHours = 0;
+			requirmentOne = requirmentsList.get(i);
+
+			nameOne = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			creditNeed = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			andOr = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			courseName = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			grade = requirmentOne.substring(0, requirmentOne.indexOf(",")); requirmentOne = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			
+			creditHoursNeed = Integer.parseInt(creditNeed);
+			orAnd = Integer.parseInt(andOr);
+
+			if(requirmentOne.length() > 1){
+				credit = requirmentOne.substring(0, requirmentOne.indexOf(","));
+				creditHours = Integer.parseInt(credit);
+				reqCourse = requirmentOne.substring(requirmentOne.indexOf(",") + 2, requirmentOne.length());
+			} else {
+				credit = requirmentOne.substring(0, requirmentOne.length());
+				creditHours = Integer.parseInt(credit);
+			}
+
+			if(nameOne.equals((req.get(req.size()-1).getDesc()))){
+				course temp2 = new course(courseName);
+				temp2.setOrAnd(orAnd);
+				temp2.setGrade(grade);
+				temp2.setPreReq(reqCourse);
+				temp2.setHours(creditHours);
+				
+				(req.get(req.size()-1)).add(temp2);
+			} else {
+				requirements next = new requirements(nameOne);
+				first.setNeededCredit(creditHoursNeed);
+
+				course temp2 = new course(courseName);
+				temp2.setOrAnd(orAnd);
+				temp2.setGrade(grade);
+				temp2.setPreReq(reqCourse);
+				temp2.setHours(creditHours);
+
+				next.add(temp2);
+				req.add(next);
+			}
+
+		}
+	}
+
+	private void printReq() {
+		for(int i = 0; i < req.size(); i++){
+			System.out.println((req.get(i)).getDesc());
+			System.out.println("\t" + ((req.get(i)).getCourse(0)).getName());
+			
+			for(int j = 0; j < (req.get(i)).size(); j++){
+				
+				if(j > 0 && ((req.get(i)).getCourse(j)).getOrAnd() == ((req.get(i)).getCourse(j-1)).getOrAnd()){
+					System.out.println("\tor " + ((req.get(i)).getCourse(j)).getName());
+				} else if (j > 0){
+					System.out.println("\tand " + ((req.get(i)).getCourse(j)).getName());
+				}
+			}
+		}
 	}
 
 	public void printCourses() {
@@ -147,7 +228,7 @@ public class advisor{
 		System.out.println("] - Value of the Grades");
 
 	}
-	
+
 	private void printCreditHours() {
 		System.out.print("[");
 		for(int i = 0; i < courses.size() - 1; i++){
