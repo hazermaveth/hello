@@ -10,6 +10,7 @@ public class advisor{
 	ArrayList<course> courses = new ArrayList<course>();
 	ArrayList<requirements> req = new ArrayList<requirements>();
 	String major;
+	int totalCredit;
 
 	/***
 	 * 
@@ -73,7 +74,7 @@ public class advisor{
 			/*System.out.println(className);
 			System.out.println(classGrade);
 			System.out.println(classCH);*/	
-
+			totalCredit += classCH;
 			course class1 = new course(className);
 			class1.setGrade(classGrade);
 			class1.setHours(classCH);
