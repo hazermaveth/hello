@@ -2,8 +2,9 @@ package SAP;
 
 public class course {
 
-	public String name, grade, group;
-	public int hours, courseGroupNum, courseIDNum, gradeValue;
+	public String name, grade, group, preReq;
+	public int hours, courseGroupNum, courseIDNum, gradeValue, orAnd;
+	public boolean hasPreReq;
 
 	public course(String string) {
 		name = string;
@@ -17,7 +18,6 @@ public class course {
 			String numberPart = name.substring(name.length() - 3 , name.length());
 			courseIDNum = Integer.parseInt(numberPart);
 		}
-
 		switch (group){
 		case "ANTH": courseGroupNum = 0; break;
 		case "CS": courseGroupNum = 1; break;
@@ -27,13 +27,25 @@ public class course {
 		case "MATH": courseGroupNum = 5; break;
 		default: courseGroupNum = 6;
 		}
-
-
 	}
 
 	public void setHours(int i) {
 		hours = i;
-
+	}
+	
+	public void setOrAnd(int i){
+		orAnd = i;
+	}
+	
+	public void setPreReq(String s){
+		if (s.isEmpty()){
+			hasPreReq = false;
+			
+		} else {
+			hasPreReq = true;
+			preReq = s;
+		}
+		
 	}
 
 	public void setGrade(String string) {
@@ -49,16 +61,16 @@ public class course {
 	}
 
 	/**
-	 * 
-	 * @return name of course
+	 * name of course
+	 * @return name
 	 */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * 
-	 * @return Value of grade
+	 * Value of grade
+	 * @return gradeValue
 	 */
 	public int getGradeValue() {
 		return gradeValue;
@@ -73,27 +85,39 @@ public class course {
 	}
 	
 	/**
-	 * 
-	 * @return number value of the group the course is in
+	 * number value of the group the course is in
+	 * @return courseGroupNum
 	 */
 	public int getNameNum() {
 		return courseGroupNum;
 	}
 	
 	/**
-	 * 
-	 * @return Number part of the course ID
+	 * Number part of the course ID
+	 * @return courseIDNum
 	 */
 	public int getIDNum() {
 		return courseIDNum;
 	}
+	
+	/**
+	 * Int based on if something is required
+	 * @return orAnd
+	 */
+	public int getOrAnd(){
+		return orAnd;
+	}
 
 	/**
-	 * 
-	 * @return Credit hours of the course
+	 * Credit hours of the course
+	 * @return hours
 	 */
 	public int getCreditHours() {
 		return hours;
+	}
+	
+	public String getPreReq(){
+		return preReq;
 	}
 
 }
