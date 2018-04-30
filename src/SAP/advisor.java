@@ -9,6 +9,7 @@ public class advisor{
 	String studentID;
 	ArrayList<course> courses = new ArrayList<course>();
 	ArrayList<requirements> req = new ArrayList<requirements>();
+	ArrayList<requirements> notDone = new ArrayList<requirements>();
 	String major;
 	int totalCredit;
 
@@ -183,14 +184,14 @@ public class advisor{
 			(req.get(i)).check(courses);	
 		}
 
-		int i = 0;
-		while (i < req.size()){
+		
+		for (int i = 0;i < req.size(); i++){
 			if ((req.get(i)).getComplete()){
-				req.remove(i);
-			} else {
-				i++;
-			}
+				notDone.add(req.get(i));
+			} 
 		}
+		req.clear();
+		req = notDone;
 
 	}
 
