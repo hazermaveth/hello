@@ -45,8 +45,8 @@ public class advisor{
 
 		for(int i = 0; i < classesTaken.size(); i++){
 			String current = classesTaken.get(i);
-			String className = current.substring(0, current.indexOf(",")); current = substring(current.indexOf(",") + 2, current.length());
-			String classGrade = current.substring(0, current.indexOf(",")); current = substring(current.indexOf(",") + 2, current.length());
+			String className = current.substring(0, current.indexOf(",")); current = current.substring(current.indexOf(",") + 2, current.length());
+			String classGrade = current.substring(0, current.indexOf(",")); current = current.substring(current.indexOf(",") + 2, current.length());
 			String currentCHours = current;
 			int classCH = Integer.parseInt(currentCHours);
 			totalCredit += classCH;
