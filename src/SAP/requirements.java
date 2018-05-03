@@ -50,22 +50,23 @@ public class requirements {
 		if (creditHours <= completeHours){
 			done = true;
 		}
-		/*for (int i = 0; i < fulfill.size(); i++){
-			for (int k = 0; k < miniReq.size(); k++){
-				System.out.println(fulfill.get(i).getName());
-				if ((fulfill.get(i)).getOrAnd() == miniReq.get(k)){
-					isDone = true;
-				}
-			}
-		}*/
+		
 		for (int i = 0; i < fulfill.size(); i++){
 			if ((fulfill.get(i)).isCompleted()){
 				fulfill.remove(i);
 			}
 		}
 	}
+	
+	
 
 	public boolean getComplete() {
 		return done;
+	}
+
+	public void removeUpperDiv() {
+		// any > 300 remove
+		// if size == 0 mark complete
+		
 	}
 }
