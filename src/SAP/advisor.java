@@ -1,6 +1,4 @@
 package SAP;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +10,7 @@ public class advisor{
 	ArrayList<requirements> notDone = new ArrayList<requirements>();
 	String major;
 	int totalCredit;
+	int upperClass = 60;
 
 	/***
 	 * 
@@ -19,12 +18,35 @@ public class advisor{
 	public void start() {
 		majorProgress();
 		reqSetUpGen();
-		//reqSetUpMajor();
-		//printCourses();
-		//printGrades();
-		//printCreditHours();
+		reqSetUpMajor();
+		printReq();
+		for(int i = 0; i < 6; i++){
+			System.out.println();
+		}
+		System.out.println("_______________________________________________________________");
+		upperDiv();
 		reqComplete();
-		//printReq();
+		printReq();
+		//System.out.print(totalCredit);
+	}
+
+
+
+	private void upperDiv() {
+		if(!(totalCredit >= upperClass)){
+			for(int i = 0; i < req.size(); i++){
+				(req.get(i)).removeUpperDiv();	
+			}
+			
+			for (int i = 0;i < req.size(); i++){
+				if (!(req.get(i)).getComplete()){
+					notDone.add(req.get(i));
+				} 
+			}
+			req.clear();
+			req = notDone;
+		}
+		
 	}
 
 
@@ -39,7 +61,7 @@ public class advisor{
 	}
 
 	public void majorProgress() {
-		List<String> classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B,  3.0", "IS 281, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
+		List<String> classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B, 3.0", "IS 281, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
 				, "CS 102, A, 1.0", "IS 315, A, 3.0", "CS 451, A, 3.0", "CS 234, A, 4.0", "ANTH 310, B, 3.0", "MATH 132, D, 4.0", "MATH 132, B, 4.0", 
 				"IS 343, A, 3.0", "IS 316, A, 3.0", "CS 360, A, 3.0", "CS 357, A, 3.0", "CS 301, B, 3.0", "CS 472, A, 3.0", "CS 461, A, 3.0");
 
@@ -47,7 +69,7 @@ public class advisor{
 			String current = classesTaken.get(i);
 			String className = current.substring(0, current.indexOf(",")); current = current.substring(current.indexOf(",") + 2, current.length());
 			String classGrade = current.substring(0, current.indexOf(",")); current = current.substring(current.indexOf(",") + 2, current.length());
-			String currentCHours = current;
+			String currentCHours = current.substring(0, current.indexOf("."));
 			int classCH = Integer.parseInt(currentCHours);
 			totalCredit += classCH;
 			course class1 = new course(className);
@@ -60,9 +82,9 @@ public class advisor{
 	public void reqSetUpGen() {
 		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, UNIV 101, D, 3", "Communicating Effectively (ENG 102), 3, ENG 102, C, 3", "Communicating Effectively (ENG 104), 3, ENG 104, C, 3",
 				"Communicating Effectively (COMM), 3, COMM 101, D, 3", "Communicating Effectively (COMM), 3, COMM 102, D, 3", "Communicating Effectively (COMM), 3, COMM 104, D, 3",
-				"Understanding and Applying Mathematical Principles, 6, MATH 113, D, 3", "Understanding and Applying Mathematical Principles, 6, MATH 119, D, 3",
-				"Understanding and Applying Mathematical Principles, 6, MATH 120, D, 3", "Understanding and Applying Mathematical Principles, 6, MATH 124, D, 3", 
-				"Understanding and Applying Mathematical Principles, 6, MATH 213, D, 3");
+				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 113, D, 3", "Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 119, D, 3",
+				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 120, D, 3", "Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 124, D, 3", 
+				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 213, D, 3");
 
 		String credit = "";
 		String reqCourse = "";
@@ -143,10 +165,8 @@ public class advisor{
 	}
 	
 	public void reqSetUpMajor() {
-	//need requirment with prereq/ 300 level/ basic level
 		List<String> requirmentsList = Arrays.asList("Computer Science Orientation, 1, CS 102, C, 1", "Discrete Mathematics for Computer Science, 3, CS 220, C, 3, MATH 119",
-				"Programming Language Concepts, 3, CS 301, C, 3", "Computer Science II, 4, CS 234, C, 4", "Database Design and Programming, 3, CS 359, C, 3, CS 357", 
-				"Understanding and Applying Mathematical Principles, 3, MATH 113, D, 3");
+				"Programming Language Concepts, 3, CS 301, C, 3", "Computer Science II, 4, CS 234, C, 4", "Database Design and Programming, 3, CS 359, C, 3, CS 357");
 
 		String credit = "";
 		String reqCourse = "";
@@ -233,7 +253,7 @@ public class advisor{
 
 		
 		for (int i = 0;i < req.size(); i++){
-			if ((req.get(i)).getComplete()){
+			if (!(req.get(i)).getComplete()){
 				notDone.add(req.get(i));
 			} 
 		}
