@@ -1,10 +1,11 @@
 package SAP;
 
+
 public class course {
 
 	public String name, grade, group, preReq;
 	public int hours, courseGroupNum, courseIDNum, gradeValue, orAnd;
-	public boolean hasPreReq;
+	public boolean hasPreReq, complete;
 
 	public course(String string) {
 		name = string;
@@ -118,6 +119,16 @@ public class course {
 	
 	public String getPreReq(){
 		return preReq;
+	}
+
+	public void completed() {
+		complete = true;
+		
+	}
+
+	public boolean isCompleted() {
+		
+		return complete;
 	}
 
 }
