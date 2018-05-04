@@ -1,3 +1,5 @@
+package SAP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +10,8 @@ public class advisor{
 	ArrayList<requirements> req = new ArrayList<requirements>();
 	ArrayList<requirements> notDone = new ArrayList<requirements>();
 	String major;
-	int totalCredit;
+	char semester;
+	int totalCredit, year;
 	int upperClass = 60;
 
 	/***
@@ -67,7 +70,7 @@ public class advisor{
 	public void majorProgress() {
 		List<String> classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B, 3.0", "IS 281, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
 				, "CS 102, A, 1.0", "IS 315, A, 3.0", "CS 451, A, 3.0", "CS 234, A, 4.0", "ANTH 310, B, 3.0", "MATH 132, D, 4.0", "MATH 132, B, 4.0", 
-				"IS 343, A, 3.0", "IS 316, A, 3.0", "CS 360, A, 3.0", "CS 357, A, 3.0", "CS 301, B, 3.0", "CS 472, A, 3.0", "CS 461, A, 3.0");
+				"IS 343, A, 3.0", "IS 316, A, 3.0", "CS 360, A, 3.0", "CS 357, A, 3.0", "CS 301, B, 3.0", "CS 472, A, 3.0", "CS 461, A, 3.0", "SOC 101, B, 3.0");
 
 		for(int i = 0; i < classesTaken.size(); i++){
 			String current = classesTaken.get(i);
@@ -86,9 +89,12 @@ public class advisor{
 	public void reqSetUpGen() {
 		List<String> requirmentsList = Arrays.asList("UNIV 101 Freshman Seminar, 3, UNIV 101, D, 3", "Communicating Effectively (ENG 102), 3, ENG 102, C, 3", "Communicating Effectively (ENG 104), 3, ENG 104, C, 3",
 				"Communicating Effectively (COMM), 3, COMM 101, D, 3", "Communicating Effectively (COMM), 3, COMM 102, D, 3", "Communicating Effectively (COMM), 3, COMM 104, D, 3",
-				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 113, D, 3", "Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 119, D, 3",
-				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 120, D, 3", "Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 124, D, 3", 
-				"Take 2 math classes in Understanding and Applying Mathematical Principles, 6, MATH 213, D, 3");
+				"Understanding and Applying Mathematical Principles, 3, MATH 113, D, 3", "Understanding and Applying Mathematical Principles, 3, MATH 119, D, 3",
+				"Understanding and Applying Mathematical Principles, 3, MATH 120, D, 3", "Understanding and Applying Mathematical Principles, 3, MATH 124, D, 3", 
+				"Understanding and Applying Mathematical Principles, 3, MATH 213, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ANTH 105, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ANTH 243, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ANTH/GEOG 103, D, 3",
+				"Social Science (Choose Two From Different Disciplines), 6, ANTH/GEOG 233, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ECON 200, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ECON 221, D, 3", "Social Science (Choose Two From Different Disciplines), 6, ECON 222, D, 3", "Social Science (Choose Two From Different Disciplines), 6, FCS 221, D, 3",
+				"Social Science (Choose Two From Different Disciplines), 6, PSCI 101, D, 3", "Social Science (Choose Two From Different Disciplines), 6, PSCI 102, D, 3", "Social Science (Choose Two From Different Disciplines), 6, PSY 101, D, 3", "Social Science (Choose Two From Different Disciplines), 6, PSY 201, D, 3", "Social Science (Choose Two From Different Disciplines), 6, PSY 202, D, 3",
+				"Social Science (Choose Two From Different Disciplines), 6, SOC 101, D, 3", "Social Science (Choose Two From Different Disciplines), 6, SOC 212, D, 3", "Social Science (Choose Two From Different Disciplines), 6, SOC 215, D, 3");
 
 		String credit = "";
 		String reqCourse = "";
@@ -169,6 +175,7 @@ public class advisor{
 	}
 
 	public void reqSetUpMajor() {
+		
 		List<String> requirmentsList = Arrays.asList("Computer Science Orientation, 1, CS 102, C, 1", "Discrete Mathematics for Computer Science, 3, CS 220, C, 3, MATH 119",
 				"Programming Language Concepts, 3, CS 301, C, 3", "Computer Science II, 4, CS 234, C, 4", "Database Design and Programming, 3, CS 359, C, 3, CS 357");
 
@@ -317,6 +324,20 @@ public class advisor{
 		System.out.println("] - Credit Hours");
 
 
+	}
+
+
+
+	public void setYear(int i) {
+		year = i;		
+	}
+
+
+
+	public void setSemester(String s) {
+		char c = s.charAt(0);
+		semester = c;
+		
 	}
 
 
