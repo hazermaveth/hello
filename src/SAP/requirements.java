@@ -1,5 +1,3 @@
-package SAP;
-
 import java.util.ArrayList;
 
 public class requirements {
@@ -8,7 +6,7 @@ public class requirements {
 	public String desc;
 	public int creditHours, completeHours;
 	public boolean done = false;
-	public ArrayList<Integer> miniReq = new ArrayList<Integer>();
+
 
 	public requirements(String s) {
 		desc = s;
@@ -50,15 +48,16 @@ public class requirements {
 		if (creditHours <= completeHours){
 			done = true;
 		}
-		
+
 		for (int i = 0; i < fulfill.size(); i++){
 			if ((fulfill.get(i)).isCompleted()){
 				fulfill.remove(i);
 			}
 		}
+
 	}
-	
-	
+
+
 
 	public boolean getComplete() {
 		return done;
@@ -66,7 +65,26 @@ public class requirements {
 
 	public void removeUpperDiv() {
 		// any > 300 remove
-		// if size == 0 mark complete
+		for (int k = 0; k < fulfill.size(); k++){
+			if((fulfill.get(k)).getIDNum() > 300){
+				(fulfill.get(k)).completed();
+			}
+
+
+		}
+
+		for (int i = 0; i < fulfill.size(); i++){
+			if ((fulfill.get(i)).isCompleted()){
+				fulfill.remove(i);
+				
+			}
+		}
 		
+		
+		// if size == 0 mark complete
+		if(fulfill.size() == 0){
+			done = true;
+		}
+
 	}
 }
