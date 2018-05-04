@@ -1,4 +1,3 @@
-package SAP;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,9 @@ public class advisor{
 		}
 		System.out.println("_______________________________________________________________");
 		upperDiv();
+		System.out.println(req.size());
 		reqComplete();
+		System.out.println(req.size());
 		printReq();
 		//System.out.print(totalCredit);
 	}
@@ -33,20 +34,23 @@ public class advisor{
 
 
 	private void upperDiv() {
-		if(!(totalCredit >= upperClass)){
+		if(totalCredit <= upperClass){
 			for(int i = 0; i < req.size(); i++){
 				(req.get(i)).removeUpperDiv();	
 			}
-			
+
 			for (int i = 0;i < req.size(); i++){
 				if (!(req.get(i)).getComplete()){
 					notDone.add(req.get(i));
 				} 
 			}
 			req.clear();
-			req = notDone;
+			for (int i = 0;i < notDone.size(); i++){
+				req.add(notDone.get(i)); 
+			}
+			notDone.clear();
 		}
-		
+
 	}
 
 
@@ -147,7 +151,7 @@ public class advisor{
 				temp2.setHours(creditHours);
 
 				(req.get(req.size()-1)).add(temp2);
-				
+
 			} else {
 				requirements next = new requirements(nameOne);
 				next.setNeededCredit(creditHoursNeed);
@@ -163,7 +167,7 @@ public class advisor{
 
 		}
 	}
-	
+
 	public void reqSetUpMajor() {
 		List<String> requirmentsList = Arrays.asList("Computer Science Orientation, 1, CS 102, C, 1", "Discrete Mathematics for Computer Science, 3, CS 220, C, 3, MATH 119",
 				"Programming Language Concepts, 3, CS 301, C, 3", "Computer Science II, 4, CS 234, C, 4", "Database Design and Programming, 3, CS 359, C, 3, CS 357");
@@ -229,7 +233,7 @@ public class advisor{
 				temp2.setHours(creditHours);
 
 				(req.get(req.size()-1)).add(temp2);
-				
+
 			} else {
 				requirements next = new requirements(nameOne);
 				next.setNeededCredit(creditHoursNeed);
@@ -251,14 +255,17 @@ public class advisor{
 			(req.get(i)).check(courses);	
 		}
 
-		
+
 		for (int i = 0;i < req.size(); i++){
 			if (!(req.get(i)).getComplete()){
 				notDone.add(req.get(i));
 			} 
 		}
 		req.clear();
-		req = notDone;
+		for (int i = 0;i < notDone.size(); i++){
+			req.add(notDone.get(i)); 
+		}
+		notDone.clear();
 
 	}
 
