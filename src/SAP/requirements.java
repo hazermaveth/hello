@@ -1,3 +1,5 @@
+package SAP;
+
 import java.util.ArrayList;
 
 public class requirements {
@@ -5,7 +7,8 @@ public class requirements {
 	public ArrayList<course> fulfill = new ArrayList<course>();
 	public String desc;
 	public int creditHours, completeHours;
-	public boolean done = false;
+	public boolean done = false, preReqMet = false;
+	public ArrayList<course> takeable = new ArrayList<course>();
 
 
 	public requirements(String s) {
@@ -45,14 +48,20 @@ public class requirements {
 
 			}
 		}
-		if (creditHours <= completeHours){
-			done = true;
-		}
 
-		for (int i = 0; i < fulfill.size(); i++){
-			if ((fulfill.get(i)).isCompleted()){
-				fulfill.remove(i);
-			}
+		for (int i = 0;i < fulfill.size(); i++){
+			if (!(fulfill.get(i)).isCompleted()){
+				takeable.add(fulfill.get(i));
+			} 
+		}
+		fulfill.clear();
+		for (int i = 0;i < takeable.size(); i++){
+			fulfill.add(takeable.get(i)); 
+		}
+		takeable.clear();
+
+		if (creditHours <= completeHours || fulfill.size() == 0){
+			done = true;
 		}
 
 	}
@@ -63,28 +72,59 @@ public class requirements {
 		return done;
 	}
 
-	public void removeUpperDiv() {
-		// any > 300 remove
-		for (int k = 0; k < fulfill.size(); k++){
-			if((fulfill.get(k)).getIDNum() > 300){
-				(fulfill.get(k)).completed();
-			}
-
-
-		}
-
+	public void upperDivCheck() {
 		for (int i = 0; i < fulfill.size(); i++){
-			if ((fulfill.get(i)).isCompleted()){
-				fulfill.remove(i);
-				
+			if((fulfill.get(i)).getIDNum() > 300){
+				(fulfill.get(i)).completed();
 			}
+
+
 		}
-		
-		
-		// if size == 0 mark complete
+
+		for (int i = 0;i < fulfill.size(); i++){
+			if (!(fulfill.get(i)).isCompleted()){
+				takeable.add(fulfill.get(i));
+			} 
+		}
+		fulfill.clear();
+		for (int i = 0;i < takeable.size(); i++){
+			fulfill.add(takeable.get(i)); 
+		}
+		takeable.clear();
+
 		if(fulfill.size() == 0){
 			done = true;
 		}
 
+	}
+
+	public void preReqCheck(ArrayList<course> list) {
+		for (int i = 0; i < fulfill.size(); i++){
+			for (int k = 0; k < list.size(); k++){
+				if((fulfill.get(i)).hasPreReq()){
+					if(((fulfill.get(i)).getPreReq()).equals((list.get(k)).getName())){
+						(fulfill.get(i)).completed(); break;
+					} 
+				} else {
+					(fulfill.get(i)).completed();
+				}
+			}
+		}
+
+		for (int i = 0;i < fulfill.size(); i++){
+				if ((fulfill.get(i)).isCompleted()){
+					takeable.add(fulfill.get(i));
+				} 
+		}
+		
+		fulfill.clear();
+		for (int i = 0;i < takeable.size(); i++){
+			fulfill.add(takeable.get(i)); 
+		}
+		takeable.clear();
+
+		if(fulfill.size() == 0){
+			done = true;
+		}
 	}
 }
