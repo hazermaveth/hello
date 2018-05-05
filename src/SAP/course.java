@@ -1,6 +1,5 @@
 package SAP;
 
-
 public class course {
 
 	public String name, grade, group, preReq;
@@ -19,15 +18,7 @@ public class course {
 			String numberPart = name.substring(name.length() - 3 , name.length());
 			courseIDNum = Integer.parseInt(numberPart);
 		}
-		switch (group){
-		case "ANTH": courseGroupNum = 0; break;
-		case "CS": courseGroupNum = 1; break;
-		case "EET": courseGroupNum = 2; break;
-		case "ENG": courseGroupNum = 3; break;
-		case "IS": courseGroupNum = 4; break;
-		case "MATH": courseGroupNum = 5; break;
-		default: courseGroupNum = 6;
-		}
+		
 	}
 
 	public void setHours(int i) {
@@ -120,14 +111,16 @@ public class course {
 	public String getPreReq(){
 		return preReq;
 	}
+	
+	public boolean hasPreReq(){
+		return hasPreReq;
+	}
 
 	public void completed() {
 		complete = true;
-		
 	}
 
 	public boolean isCompleted() {
-		
 		return complete;
 	}
 
