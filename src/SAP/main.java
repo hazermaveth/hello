@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -78,13 +79,13 @@ public class main {
 				//Things to do when button is pressed
 				
 				studentName = fieldOne.getText();
-				System.out.println(studentName);
+				//System.out.println(studentName);
 
 				year = Integer.parseInt(fieldTwo.getText());
-				System.out.println(year);
+				//System.out.println(year);
 
 				studentID = fieldThree.getText();
-				System.out.println(studentID);
+				//System.out.println(studentID);
 				
 				studentMajor = fieldSix.getText();
 				
@@ -94,14 +95,27 @@ public class main {
 				}else{
 					semester = radioTwo.getText();
 				}
-				System.out.println(semester);
+				//System.out.println(semester);
 				advisor test = new advisor(studentID);
 				test.setMajor(studentMajor);
 				test.setYear(year);
 				test.setSemester(semester);
 				test.start();
 				
-				JOptionPane.showMessageDialog(null, test.stringReq());
+				//JOptionPane.showMessageDialog(null, test.stringReq());
+				JFrame myFrame2 = new JFrame("Result");
+				
+				myFrame2.setSize(350, 400);
+				myFrame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				myFrame2.setResizable(true);
+				
+				JPanel resultsPanel = new JPanel();
+				resultsPanel.setBackground(new Color(0,152,0));
+				JTextArea results = new JTextArea(test.stringReq());
+				
+				resultsPanel.add(results);
+				myFrame2.add(resultsPanel);
+				myFrame2.setVisible(true);
 
 			}
 		});
