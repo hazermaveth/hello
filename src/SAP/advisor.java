@@ -24,13 +24,10 @@ public class advisor{
 		reqSetUpGen();
 		reqSetUpMajor();
 		upperDiv();
-
 		reqComplete();
-
-
 		preReqMet();
-
 		offThisYear();
+		//offThisSemester();
 		System.out.print(stringReq());
 	}
 
@@ -38,6 +35,24 @@ public class advisor{
 	private void offThisYear() {
 		for(int i = 0; i < req.size(); i++){
 			(req.get(i)).checkYear(year);	
+		}
+
+
+		for (int i = 0;i < req.size(); i++){
+			if (!(req.get(i)).getComplete()){
+				notDone.add(req.get(i));
+			} 
+		}
+		req.clear();
+		for (int i = 0;i < notDone.size(); i++){
+			req.add(notDone.get(i)); 
+		}
+		notDone.clear();
+	}
+	
+	private void offThisSemester() {
+		for(int i = 0; i < req.size(); i++){
+			(req.get(i)).checkSemester(semester);	
 		}
 
 
