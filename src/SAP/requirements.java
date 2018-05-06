@@ -54,11 +54,12 @@ public class requirements {
 		for (int i = 0;i < fulfill.size(); i++){
 			if (!(fulfill.get(i)).isCompleted()){
 				takeable.add(fulfill.get(i));
-			} 
+			}
 		}
 		fulfill.clear();
 		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
+			(takeable.get(i)).resetComplete();
+			fulfill.add(takeable.get(i));
 		}
 		takeable.clear();
 
@@ -90,7 +91,8 @@ public class requirements {
 		}
 		fulfill.clear();
 		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
+			(takeable.get(i)).resetComplete();
+			fulfill.add(takeable.get(i));
 		}
 		takeable.clear();
 
@@ -121,7 +123,8 @@ public class requirements {
 
 		fulfill.clear();
 		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
+			(takeable.get(i)).resetComplete();
+			fulfill.add(takeable.get(i));
 		}
 		takeable.clear();
 
@@ -159,7 +162,9 @@ public class requirements {
 
 		fulfill.clear();
 		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
+			(takeable.get(i)).resetComplete();
+			fulfill.add(takeable.get(i));
+			
 		}
 		takeable.clear();
 
