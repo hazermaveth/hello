@@ -1,171 +1,142 @@
-package SAP;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 
-
-import java.util.ArrayList;
-
-public class requirements {
-
-	public ArrayList<course> fulfill = new ArrayList<course>();
-	public String desc;
-	public int creditHours, completeHours;
-	public boolean done = false, preReqMet = false;
-	public ArrayList<course> takeable = new ArrayList<course>();
+public class main {
+	//Setting up variable to gather student info from the form
+	public static String studentName = "";
+	public static int year = 0;
+	public static String studentID = "";
+	public static String semester = "";
+	public static String studentMajor = "";
 
 
-	public requirements(String s) {
-		desc = s;
-	}
+	public static void main(String[] args) {
+		//Set up the main window
+		JFrame myFrame = new JFrame("Advising");
+		myFrame.setLayout(new GridLayout(6,1));
+		myFrame.setSize(500, 500);
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		myFrame.setResizable(false);
 
-	public void setNeededCredit(int i) {
-		creditHours = i;
-	}
+		//Set up the first panel containing the label and text field for studentName
+		JPanel panelOne = new JPanel();
+		panelOne.setBackground(new Color(0,152,0));
+		JLabel labelOne = new JLabel("Enter Your Name: ");
+		JTextField fieldOne = new JTextField(20);
 
-	public void add(course temp) {
-		fulfill.add(temp);
-	}
+		//Set up the second panel containing the label and text field for year
+		JPanel panelTwo = new JPanel();
+		panelTwo.setBackground(new Color(192,192,192));
+		JLabel labelTwo = new JLabel("Enter Year for Calculation: ");
+		JTextField fieldTwo = new JTextField(20);
 
-	public String getDesc() {
-		return desc;
-	}
-
-	public int size() {
-		return fulfill.size();
-	}
-
-	public course getCourse(int i) {
-		return fulfill.get(i);
-	}
-
-	public void check(ArrayList<course> list) {
-		for (int k = 0; k < fulfill.size(); k++){
-			for (int i = 0; i < list.size(); i++){
-				if (((fulfill.get(k)).getName()).equals((list.get(i)).getName())){
-					if((fulfill.get(k)).getGradeValue() < (list.get(i)).getGradeValue()){
-						completeHours += (list.get(i)).getCreditHours();
-						(fulfill.get(k)).completed();
-					}
-
-				}
-
-			}
-		}
-
-		for (int i = 0;i < fulfill.size(); i++){
-			if (!(fulfill.get(i)).isCompleted()){
-				takeable.add(fulfill.get(i));
-			} 
-		}
-		fulfill.clear();
-		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
-		}
-		takeable.clear();
-
-		if (creditHours <= completeHours || fulfill.size() == 0){
-			done = true;
-		}
-
-	}
+		//Set up the third panel containing the label and text field for studentID
+		JPanel panelThree = new JPanel();
+		panelThree.setBackground(new Color(192,192,192));
+		JLabel labelThree = new JLabel("Enter Student ID: ");
+		JTextField fieldThree = new JTextField(20);
 
 
-
-	public boolean getComplete() {
-		return done;
-	}
-
-	public void upperDivCheck() {
-		for (int i = 0; i < fulfill.size(); i++){
-			if((fulfill.get(i)).getIDNum() > 300){
-				(fulfill.get(i)).completed();
-			}
-
-
-		}
-
-		for (int i = 0;i < fulfill.size(); i++){
-			if (!(fulfill.get(i)).isCompleted()){
-				takeable.add(fulfill.get(i));
-			} 
-		}
-		fulfill.clear();
-		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
-		}
-		takeable.clear();
-
-		if(fulfill.size() == 0){
-			done = true;
-		}
-
-	}
-
-	public void preReqCheck(ArrayList<course> list) {
-		for (int i = 0; i < fulfill.size(); i++){
-			for (int k = 0; k < list.size(); k++){
-				if((fulfill.get(i)).hasPreReq()){
-					if(((fulfill.get(i)).getPreReq()).equals((list.get(k)).getName())){
-						(fulfill.get(i)).completed(); break;
-					} 
-				} else {
-					(fulfill.get(i)).completed();
-				}
-			}
-		}
-
-		for (int i = 0;i < fulfill.size(); i++){
-			if ((fulfill.get(i)).isCompleted()){
-				takeable.add(fulfill.get(i));
-			} 
-		}
-
-		fulfill.clear();
-		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
-		}
-		takeable.clear();
-
-		if(fulfill.size() == 0){
-			done = true;
-		}
-	}
-
-	public void checkYear(int year) {
+		//Set up the fourth panel and radio buttons for semester
+		JPanel panelFive = new JPanel();
+		panelFive.setBackground(new Color(0,152,0));
+		JLabel labelFive = new JLabel("Semester for Calculation: ");
+		JRadioButton radioOne = new JRadioButton("Fall");
+		radioOne.setSelected(true);
+		JRadioButton radioTwo = new JRadioButton("Spring");
+		ButtonGroup group = new ButtonGroup();
+		group.add(radioOne);
+		group.add(radioTwo);
 		
-		for (int i = 0; i < fulfill.size(); i++){
-			if ((fulfill.get(i)).getYear().equals("O")){
-				if (year%2 == 1){
-					(fulfill.get(i)).completed();
-					System.out.println(fulfill.get(i).getName());
+		//Set up sixth panel for studentMajor
+		JPanel panelSix = new JPanel();
+		panelSix.setBackground(new Color(0,152,0));
+		JLabel labelSix = new JLabel("Enter Your Major: ");
+		JTextField fieldSix = new JTextField(20);
+
+
+		//Set up the fifth panel for the calculate button
+		JPanel panelFour = new JPanel();
+		panelFour.setBackground(new Color(192,192,192));
+		JButton buttonOne = new JButton("Calculate");
+
+		//Adds an action listener to the button to gather all information when pressed
+		buttonOne.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Things to do when button is pressed
+				
+				studentName = fieldOne.getText();
+				System.out.println(studentName);
+
+				year = Integer.parseInt(fieldTwo.getText());
+				System.out.println(year);
+
+				studentID = fieldThree.getText();
+				System.out.println(studentID);
+				
+				studentMajor = fieldSix.getText();
+				
+
+				if(radioOne.isSelected()){
+					semester = radioOne.getText();
+				}else{
+					semester = radioTwo.getText();
 				}
-			} else if ((fulfill.get(i)).getYear().equals("E")){
-				if (year%2 == 0){
-					(fulfill.get(i)).completed();
-					System.out.println(fulfill.get(i).getName());
-				}
-			} else if ((fulfill.get(i)).getYear().equals("A")){
-				(fulfill.get(i)).completed();
+				System.out.println(semester);
+				advisor test = new advisor(studentID);
+				test.setMajor(studentMajor);
+				test.setYear(year);
+				test.setSemester(semester);
+				test.start();
+				
+				JOptionPane.showMessageDialog(null, test.stringReq());
+
 			}
+		});
 
 
-		}
+
+		//Adding all components and panels to their respective panel or frame
+		panelOne.add(labelOne);
+		panelOne.add(fieldOne);
+		panelTwo.add(labelTwo);
+		panelTwo.add(fieldTwo);
+		panelThree.add(labelThree);
+		panelThree.add(fieldThree);
+		panelFour.add(buttonOne);
+		panelFive.add(labelFive);
+		panelFive.add(radioOne);
+		panelFive.add(radioTwo);
+		panelSix.add(labelSix);
+		panelSix.add(fieldSix);
+		myFrame.add(panelOne);
+		myFrame.add(panelThree);
+		myFrame.add(panelSix);
+		myFrame.add(panelTwo);
+		myFrame.add(panelFive);
+		myFrame.add(panelFour);
+
+		//Show the main frame
+		myFrame.setVisible(true);
+
+
+
+
 		
-		for (int i = 0;i < fulfill.size(); i++){
-			if ((fulfill.get(i)).isCompleted()){
-				takeable.add(fulfill.get(i));
-				System.out.println(fulfill.get(i).getName());
-			} 
-		}
 
-		fulfill.clear();
-		for (int i = 0;i < takeable.size(); i++){
-			fulfill.add(takeable.get(i)); 
-		}
-		takeable.clear();
 
-		if(fulfill.size() == 0){
-			done = true;
-		}
 	}
 
 }
