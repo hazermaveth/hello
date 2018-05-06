@@ -118,7 +118,11 @@ public class course {
 	public void completed() {
 		complete = true;
 	}
-
+	
+	public void resetComplete(){
+		complete = false;	
+	}
+	
 	public boolean isCompleted() {
 		return complete;
 	}
