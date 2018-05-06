@@ -1,8 +1,7 @@
-package SAP;
 
 public class course {
 
-	public String name, grade, group, preReq;
+	public String name, grade, group, preReq, semester, year;
 	public int hours, courseGroupNum, courseIDNum, gradeValue, orAnd;
 	public boolean hasPreReq, complete;
 
@@ -122,6 +121,24 @@ public class course {
 
 	public boolean isCompleted() {
 		return complete;
+	}
+
+	public void setYearOffered(String s) {
+		year = s;
+		
+	}
+
+	public void setSemesterOffered(String s) {
+		semester = s;
+		
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public String getYear() {
+		return year;
 	}
 
 }
