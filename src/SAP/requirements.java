@@ -1,5 +1,7 @@
 package SAP;
 
+
+
 import java.util.ArrayList;
 
 public class requirements {
@@ -112,11 +114,11 @@ public class requirements {
 		}
 
 		for (int i = 0;i < fulfill.size(); i++){
-				if ((fulfill.get(i)).isCompleted()){
-					takeable.add(fulfill.get(i));
-				} 
+			if ((fulfill.get(i)).isCompleted()){
+				takeable.add(fulfill.get(i));
+			} 
 		}
-		
+
 		fulfill.clear();
 		for (int i = 0;i < takeable.size(); i++){
 			fulfill.add(takeable.get(i)); 
@@ -127,4 +129,43 @@ public class requirements {
 			done = true;
 		}
 	}
+
+	public void checkYear(int year) {
+		
+		for (int i = 0; i < fulfill.size(); i++){
+			if ((fulfill.get(i)).getYear().equals("O")){
+				if (year%2 == 1){
+					(fulfill.get(i)).completed();
+					System.out.println(fulfill.get(i).getName());
+				}
+			} else if ((fulfill.get(i)).getYear().equals("E")){
+				if (year%2 == 0){
+					(fulfill.get(i)).completed();
+					System.out.println(fulfill.get(i).getName());
+				}
+			} else if ((fulfill.get(i)).getYear().equals("A")){
+				(fulfill.get(i)).completed();
+			}
+
+
+		}
+		
+		for (int i = 0;i < fulfill.size(); i++){
+			if ((fulfill.get(i)).isCompleted()){
+				takeable.add(fulfill.get(i));
+				System.out.println(fulfill.get(i).getName());
+			} 
+		}
+
+		fulfill.clear();
+		for (int i = 0;i < takeable.size(); i++){
+			fulfill.add(takeable.get(i)); 
+		}
+		takeable.clear();
+
+		if(fulfill.size() == 0){
+			done = true;
+		}
+	}
+
 }
