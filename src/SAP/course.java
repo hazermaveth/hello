@@ -1,4 +1,3 @@
-
 public class course {
 
 	public String name, grade, group, preReq, semester, year;
