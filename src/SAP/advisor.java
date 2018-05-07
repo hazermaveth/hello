@@ -1,3 +1,4 @@
+package SAP;
 
 
 import java.util.ArrayList;
@@ -5,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class advisor{
+	
 	String studentID;
 	ArrayList<course> courses = new ArrayList<course>();
 	ArrayList<requirements> req = new ArrayList<requirements>();
@@ -15,6 +17,15 @@ public class advisor{
 	int upperDevClass = 300, upperClass = 60, upperDevCredit = 0, upperDevCreditNeed = 40;
 	boolean odd;
 
+	/**
+	 * constructor for advisor and sets the student ID
+	 * @param s
+	 */
+	public advisor(String s) {
+		studentID = s;
+	}
+
+	
 	/***
 	 * Runs all function in an order to
 	 * limit the list of requirements down
@@ -29,7 +40,6 @@ public class advisor{
 		offThisYear();
 		offThisSemester();
 		order();
-		System.out.print(stringReq());
 	}
 
 
@@ -50,13 +60,6 @@ public class advisor{
 			}
 		}
 	}
-
-
-
-
-
-
-
 
 	/**
 	 * Checks if the class is offered in the selected year.
@@ -101,7 +104,6 @@ public class advisor{
 
 	}
 
-
 	/**
 	 * This method checks the list for classes that have prereqs.
 	 * if the prereq is not met, it is removed until the prereq is completed
@@ -120,11 +122,7 @@ public class advisor{
 			req.add(notDone.get(i)); 
 		}
 		notDone.clear();
-
-
 	}
-
-
 
 	/**
 	 * If the student is not classified as an upper division student
@@ -150,14 +148,12 @@ public class advisor{
 
 	}
 
-
-
-	public advisor(String newID) {
-		studentID = newID;
-	}
-
-	public void setMajor(String string) {
-		major = string;	
+	/**
+	 * Sets the major that the student wants to take
+	 * @param s
+	 */
+	public void setMajor(String s) {
+		major = s;	
 	}
 
 	/**
@@ -165,14 +161,14 @@ public class advisor{
 	 */
 	public void majorProgress() {
 		List<String> classesTaken = new ArrayList<String>();
-		classesTaken = Arrays.asList("MATH 693, F, 0.0");
+		classesTaken = Arrays.asList("MATH 100, F, 0.0");
 		if (studentID.equals("F338258016")){
 			classesTaken = Arrays.asList("MATH 119, C, 4.0", "IS 301, B, 3.0", "IS 281, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
 					, "CS 102, A, 1.0", "IS 315, A, 3.0", "CS 451, A, 3.0", "CS 234, A, 4.0", "ANTH 310, B, 3.0", "MATH 132, D, 4.0", "MATH 132, B, 4.0", 
 					"IS 343, A, 3.0", "IS 316, A, 3.0", "CS 360, A, 3.0", "CS 357, A, 3.0", "CS 301, B, 3.0", "CS 472, A, 3.0", "CS 461, A, 3.0");
 		} else if (studentID.equals("F333124653")) {
-			classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B, 3.0", "IS 281, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
-					, "CS 102, A, 1.0", "IS 315, A, 3.0", "ENG 102, A, 3.0", "CS 234, A, 4.0", "ANTH 310, B, 3.0", "MATH 132, D, 4.0", "MATH 132, B, 4.0", 
+			classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B, 3.0", "IS 381, A, 3.0", "ENG 305, B, 3.0", "EET 340, B, 3.0"
+					, "CS 102, A, 1.0", "IS 315, A, 3.0", "ENG 102, A, 3.0", "CS 434, A, 4.0", "ANTH 310, B, 3.0", "MATH 132, D, 4.0", "MATH 132, B, 4.0", 
 					"IS 343, A, 3.0", "IS 316, A, 3.0", "CS 360, A, 3.0", "CS 357, A, 3.0", "CS 301, B, 3.0", "CS 472, A, 3.0", "CS 461, A, 3.0", "SOC 101, B, 3.0");
 		} else if (studentID.equals("F438688089")){
 			classesTaken = Arrays.asList("MATH 124, C, 4.0", "IS 301, B, 3.0", "IS 281, A, 3.0", "ENG 104, B, 3.0", "EET 340, B, 3.0"
@@ -202,7 +198,8 @@ public class advisor{
 			}
 		}
 	}
-	/*
+	
+	/**
 	 * List of courses in the following format
 	 * "Full name of the section, Credit Hours needed for the section, Course name and number, semester offered, year offered, grade needed, credit hours given for completion" 
 	 */
@@ -450,7 +447,11 @@ public class advisor{
 	 */
 	public String stringReq() {
 		String s = "";
-
+		
+		if(upperDevCredit < upperDevCreditNeed){
+			s += upperDevCredit + " of the needed " + upperDevCreditNeed + " upper devision course completed\n";
+		}
+		
 		for(int i = 0; i < req.size(); i++){
 			s = s + (req.get(i)).getDesc() + "\n";
 			s = s + "\t" + ((req.get(i)).getCourse(0)).getName() + "\n";
@@ -463,7 +464,7 @@ public class advisor{
 
 	/**
 	 * converts the array of courses into a string
-	 * @return courses the student has taken
+	 * @return string of the courses that the student has taken
 	 */
 	public String stringCourses() {
 
