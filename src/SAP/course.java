@@ -1,11 +1,17 @@
+package SAP;
+
 public class course {
 
 	public String name, grade, group, preReq, semester, year;
 	public int hours, courseGroupNum, courseIDNum, gradeValue, orAnd;
 	public boolean hasPreReq, complete;
 
-	public course(String string) {
-		name = string;
+	/**
+	 * Sets the name of the course name and course ID
+	 * @param s
+	 */
+	public course(String s) {
+		name = s;
 		char labCom = name.charAt(name.length()-1);
 		if (labCom == 'L'){
 			group = name.substring(0, name.length()-5);
@@ -19,14 +25,20 @@ public class course {
 		
 	}
 
+	/**
+	 * Sets the credit hours that the courses has
+	 * @param i
+	 */
 	public void setHours(int i) {
 		hours = i;
 	}
 	
-	public void setOrAnd(int i){
-		orAnd = i;
-	}
-	
+	/**
+	 * Sets the preReq that the courses has
+	 * also sets the hasPreReq true or false
+	 * based on the string
+	 * @param s
+	 */
 	public void setPreReq(String s){
 		if (s.isEmpty()){
 			hasPreReq = false;
@@ -38,8 +50,13 @@ public class course {
 		
 	}
 
-	public void setGrade(String string) {
-		grade = string;
+	/**
+	 * Sets the grade of the course either needed or taken
+	 * also sets the grade value
+	 * @param s
+	 */
+	public void setGrade(String s) {
+		grade = s;
 		switch (grade){
 		case "A": gradeValue = 4; break;
 		case "B": gradeValue = 3; break;
@@ -59,6 +76,8 @@ public class course {
 	}
 	
 	/**
+	 * This is used to make sure the course the student took meet
+	 * the requirement 
 	 * Value of grade
 	 * @return gradeValue
 	 */
@@ -67,7 +86,7 @@ public class course {
 	}
 
 	/**
-	 * 
+	 * Used for error checking
 	 * @return grade
 	 */
 	public String getGrade() {
@@ -89,14 +108,6 @@ public class course {
 	public int getIDNum() {
 		return courseIDNum;
 	}
-	
-	/**
-	 * Int based on if something is required
-	 * @return orAnd
-	 */
-	public int getOrAnd(){
-		return orAnd;
-	}
 
 	/**
 	 * Credit hours of the course
@@ -106,40 +117,87 @@ public class course {
 		return hours;
 	}
 	
+	/**
+	 * The prerequisites that the course has
+	 * @return preReq
+	 */
 	public String getPreReq(){
 		return preReq;
 	}
 	
+	/**
+	 * Returns true if the course have a prerequisites
+	 * Returns false if the course does not have a prerequisites
+	 * @return hasPreReq
+	 */
 	public boolean hasPreReq(){
 		return hasPreReq;
 	}
 
+	/**
+	 * Sets complete to be true so that it can be cleared or saved
+	 */
 	public void completed() {
 		complete = true;
 	}
 	
+	/**
+	 * Sets complete to false so that it can be cleared or saved
+	 */
 	public void resetComplete(){
 		complete = false;	
 	}
 	
+	/**
+	 * used for 
+	 * @return complete
+	 */
 	public boolean isCompleted() {
 		return complete;
 	}
 
+	/**
+	 * sets the year that a course is offered
+	 * E for even years
+	 * O for odd years
+	 * A for every year
+	 * @param s
+	 */
 	public void setYearOffered(String s) {
 		year = s;
 		
 	}
 
+	/**
+	 * sets the semester that a course is offered
+	 * F for fall
+	 * S for spring
+	 * B for both
+	 * @param s
+	 */
 	public void setSemesterOffered(String s) {
 		semester = s;
 		
 	}
 
+	/**
+	 * returns the type of semester a course is offered
+	 * F for fall
+	 * S for spring
+	 * B for both
+	 * @return semester
+	 */
 	public String getSemester() {
 		return semester;
 	}
 
+	/**
+	 * returns the type of year a course is offered
+	 * E for even years
+	 * O for odd years
+	 * A for every year
+	 * @return year
+	 */
 	public String getYear() {
 		return year;
 	}
